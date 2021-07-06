@@ -1,0 +1,34 @@
+###consul服务端口号
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order
+  ####consul注册中心地址
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #hostname: 127.0.0.1
+        service-name: ${spring.application.name}
+
+ribbon:
+  # 请求连接的超时时间
+  ConnectTimeout: 2000
+  # 请求处理的超时时间
+  ReadTimeout: 5000
+  eager-load:
+#    哪个模块需要开启饥饿加载
+    clients: cloud-consumer-order80
+    #    饥饿加载模式
+    enabled: true
+
+
+
+#为某个服务单独设置
+nacos-server:
+  ribbon:
+    ConnectTimeout: 2000
+    ReadTimeout: 5000
